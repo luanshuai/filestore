@@ -23,6 +23,9 @@ services:
       - redis
     user: node
     command: npm run test:acceptance:_run
+    privileged: true
+#    cap_add:
+#     - ALL
 
   redis:
     image: redis
