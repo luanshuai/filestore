@@ -2,6 +2,9 @@ String cron_string = BRANCH_NAME == "master" ? "@daily" : ""
 
 pipeline {
   agent any
+  environment {
+    DOCKER_REPO_KEY_PATH = credentials('docker-repo-key')
+  }
 
   triggers {
     pollSCM('* * * * *')
@@ -29,7 +32,9 @@ pipeline {
 
     stage('Package and publish build') {
       steps {
+        sh 'docker login -u _json_key --password-stdin https://quay.io/sharelatex < ${DOCKER_REPO_KEY_PATH}'
         sh 'make publish'
+        sh 'docker logout https://gcr.io'
       }
     }
 
