@@ -24,6 +24,10 @@ services:
       - redis
     user: node
     command: npm run test:acceptance:_run
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
 
   redis:
     image: redis
