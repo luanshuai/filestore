@@ -4,7 +4,6 @@ logger.initialize("filestore")
 settings = require("settings-sharelatex")
 request = require("request")
 fileController = require("./app/js/FileController")
-bucketController = require("./app/js/BucketController")
 keyBuilder = require("./app/js/KeyBuilder")
 healthCheckController = require("./app/js/HealthCheckController")
 domain = require("domain")
@@ -19,7 +18,7 @@ Metrics.memory.monitor(logger)
 
 app.configure ->
 	app.use Metrics.http.monitor(logger)
-
+	
 app.configure 'development', ->
 	console.log "Development Enviroment"
 	app.use express.errorHandler({ dumpExceptions: true, showStack: true })
@@ -87,8 +86,6 @@ app.del "/project/:project_id/public/:public_file_id", keyBuilder.publicFileKey,
 
 app.get "/project/:project_id/size", keyBuilder.publicProjectKey, fileController.directorySize
 
-app.get "/bucket/:bucket/key/*", bucketController.getFile
-
 app.get "/heapdump", (req, res)->
 	require('heapdump').writeSnapshot '/tmp/' + Date.now() + '.filestore.heapsnapshot', (err, filename)->
 		res.send filename
@@ -106,6 +103,8 @@ app.get '/status', (req, res)->
 
 
 app.get "/health_check", healthCheckController.check
+	
+
 
 
 app.get '*', (req, res)->

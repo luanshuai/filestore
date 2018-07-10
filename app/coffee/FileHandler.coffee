@@ -7,7 +7,7 @@ KeyBuilder = require("./KeyBuilder")
 async = require("async")
 ImageOptimiser = require("./ImageOptimiser")
 
-module.exports = FileHandler =
+module.exports =
 
 	insertFile: (bucket, key, stream, callback)->
 		convertedKey = KeyBuilder.getConvertedFolderKey key
@@ -23,8 +23,7 @@ module.exports = FileHandler =
 		], callback
 
 	getFile: (bucket, key, opts = {}, callback)->
-		# In this call, opts can contain credentials
-		logger.log bucket:bucket, key:key, opts:@_scrubSecrets(opts), "getting file"
+		logger.log bucket:bucket, key:key, opts:opts, "getting file"
 		if !opts.format? and !opts.style?
 			@_getStandardFile bucket, key, opts, callback
 		else
@@ -33,7 +32,7 @@ module.exports = FileHandler =
 	_getStandardFile: (bucket, key, opts, callback)->
 		PersistorManager.getFileStream bucket, key, opts, (err, fileStream)->
 			if err?
-				logger.err  bucket:bucket, key:key, opts:FileHandler._scrubSecrets(opts), "error getting fileStream"
+				logger.err  bucket:bucket, key:key, opts:opts, "error getting fileStream"
 			callback err, fileStream
 
 	_getConvertedFile: (bucket, key, opts, callback)->
@@ -72,7 +71,7 @@ module.exports = FileHandler =
 				return callback(err)
 			done = (err, destPath)->
 				if err?
-					logger.err err:err, bucket:bucket, originalKey:originalKey, opts:FileHandler._scrubSecrets(opts), "error converting file"
+					logger.err err:err, bucket:bucket, originalKey:originalKey, opts:opts, "error converting file"
 					return callback(err)
 				LocalFileWriter.deleteFile originalFsPath, ->
 				callback(err, destPath, originalFsPath)
@@ -99,8 +98,3 @@ module.exports = FileHandler =
 			if err?
 				logger.err  bucket:bucket, project_id:project_id, "error getting size"
 			callback err, size
-
-	_scrubSecrets: (opts)->
-		safe = Object.assign {}, opts
-		delete safe.credentials
-		safe
