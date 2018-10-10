@@ -9,6 +9,10 @@ bucketController = require("./app/js/BucketController")
 keyBuilder = require("./app/js/KeyBuilder")
 healthCheckController = require("./app/js/HealthCheckController")
 domain = require("domain")
+
+require('@google-cloud/debug-agent').start({ allowExpressions: true });
+require('@google-cloud/trace-agent').start()
+
 appIsOk = true
 app = express()
 
