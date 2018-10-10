@@ -1,5 +1,10 @@
-require('@google-cloud/debug-agent').start({ allowExpressions: true });
 require('@google-cloud/trace-agent').start()
+require('@google-cloud/debug-agent').start({
+  serviceContext: {
+    service: 'filestore-readonly',
+    version: '0.0.1'
+  }
+});
 
 express = require('express')
 bodyParser = require "body-parser"
