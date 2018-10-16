@@ -411,11 +411,6 @@
       "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz",
       "dev": true
     },
-    "coffee-script": {
-      "version": "1.7.1",
-      "from": "coffee-script@>=1.7.1 <1.8.0",
-      "resolved": "https://registry.npmjs.org/coffee-script/-/coffee-script-1.7.1.tgz"
-    },
     "colors": {
       "version": "0.6.2",
       "from": "colors@~0.6.0-1",
