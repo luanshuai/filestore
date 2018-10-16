@@ -49,8 +49,7 @@ describe "AWSSDKPersistorManager", ->
 			@AWSSDKPersistorManager.sendFile @bucketName, @key, @fsPath, (err) =>
 				expect(err).to.not.be.ok
 				expect(@s3.upload.calledOnce, "called only once").to.be.true
-				expect((@s3.upload.calledWith Bucket: @bucketName, Key: @key, Body: @stream)
-							 , "called with correct arguments").to.be.true
+				expect((@s3.upload.calledWith Bucket: @bucketName, Key: @key, Body: @stream), "called with correct arguments").to.be.true
 				done()
 
 		it "should dispatch the error from s3.upload", (done) ->
@@ -69,8 +68,7 @@ describe "AWSSDKPersistorManager", ->
 			@AWSSDKPersistorManager.sendStream @bucketName, @key, @stream, (err) =>
 				expect(err).to.not.be.ok
 				expect(@s3.upload.calledOnce, "called only once").to.be.true
-				expect((@s3.upload.calledWith Bucket: @bucketName, Key: @key, Body: @stream),
-							 "called with correct arguments").to.be.true
+				expect((@s3.upload.calledWith Bucket: @bucketName, Key: @key, Body: @stream), "called with correct arguments").to.be.true
 				done()
 
 		it "should dispatch the error from s3.upload", (done) ->
@@ -96,8 +94,7 @@ describe "AWSSDKPersistorManager", ->
 				expect(@read_stream_on.calledTwice)
 				expect(err).to.not.be.ok
 				expect(stream, "returned the stream").to.equal @read_stream
-				expect((@s3.getObject.calledWith Bucket: @bucketName, Key: @key),
-							 "called with correct arguments").to.be.true
+				expect((@s3.getObject.calledWith Bucket: @bucketName, Key: @key), "called with correct arguments").to.be.true
 				done()
 
 		describe "with start and end options", ->
@@ -108,8 +105,7 @@ describe "AWSSDKPersistorManager", ->
 			it "should pass headers to the s3.GetObject", (done) ->
 				@read_stream_on.withArgs('readable').callsArgWith 1
 				@AWSSDKPersistorManager.getFileStream @bucketName, @key, @opts, (err, stream) =>
-					expect((@s3.getObject.calledWith Bucket: @bucketName, Key: @key, Range: 'bytes=0-8'),
-						"called with correct arguments").to.be.true
+					expect((@s3.getObject.calledWith Bucket: @bucketName, Key: @key, Range: 'bytes=0-8'), "called with correct arguments").to.be.true
 				done()
 
 		describe "error conditions", ->
@@ -146,8 +142,7 @@ describe "AWSSDKPersistorManager", ->
 			@AWSSDKPersistorManager.copyFile @bucketName, @key, @destKey, (err) =>
 				expect(err).to.not.be.ok
 				expect(@s3.copyObject.calledOnce, "called only once").to.be.true
-				expect((@s3.copyObject.calledWith Bucket: @bucketName, Key: @destKey, CopySource: @bucketName + '/' + @key),
-					"called with correct arguments").to.be.true
+				expect((@s3.copyObject.calledWith Bucket: @bucketName, Key: @destKey, CopySource: @bucketName + '/' + @key), "called with correct arguments").to.be.true
 				done()
 
 		it "should dispatch the error from s3.copyObject", (done) ->
@@ -162,8 +157,7 @@ describe "AWSSDKPersistorManager", ->
 			@AWSSDKPersistorManager.deleteFile @bucketName, @key, (err) =>
 				expect(err).to.not.be.ok
 				expect(@s3.deleteObject.calledOnce, "called only once").to.be.true
-				expect((@s3.deleteObject.calledWith Bucket: @bucketName, Key: @key),
-					"called with correct arguments").to.be.true
+				expect((@s3.deleteObject.calledWith Bucket: @bucketName, Key: @key), "called with correct arguments").to.be.true
 				done()
 
 		it "should dispatch the error from s3.deleteObject", (done) ->
