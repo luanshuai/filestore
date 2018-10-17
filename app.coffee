@@ -1,10 +1,10 @@
 require('@google-cloud/trace-agent').start()
 require('@google-cloud/debug-agent').start({
-  serviceContext: {
-  	allowExpressions: true,
-    service: 'filestore-readonly',
-    version: '0.0.1'
-  }
+	serviceContext: {
+		allowExpressions: true,
+		service: 'filestore-readonly',
+		version: '0.0.1'
+	}
 });
 
 express = require('express')
