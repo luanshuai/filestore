@@ -31,7 +31,7 @@
     "heapdump": "^0.3.2",
     "knox": "~0.9.1",
     "logger-sharelatex": "git+https://github.com/sharelatex/logger-sharelatex.git#13562f8866708fc86aef8202bf5a2ce4d1c6eed7",
-    "metrics-sharelatex": "git+https://github.com/sharelatex/metrics-sharelatex.git#e5356366b5b83997c8e1645b2e936af453381517",
+    "metrics-sharelatex": "git+https://github.com/sharelatex/metrics-sharelatex.git#02522a50b7a5ec46eed9b0a93513ef992a21eb45",
     "mocha": "5.2.0",
     "node-transloadit": "0.0.4",
     "node-uuid": "~1.4.1",
