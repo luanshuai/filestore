@@ -21,6 +21,8 @@ Metrics.open_sockets.monitor(logger)
 Metrics.event_loop?.monitor(logger)
 Metrics.memory.monitor(logger)
 
+Metrics.injectMetricsRoute(app)
+
 app.use Metrics.http.monitor(logger)
 
 Metrics.inc "startup"
