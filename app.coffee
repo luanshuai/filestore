@@ -32,8 +32,6 @@ app.configure 'production', ->
 	console.log "Production Enviroment"
 	app.use express.errorHandler()
 
-Metrics.inc "startup"
-
 app.use (req, res, next)->
 	Metrics.inc "http-request"
 	next()
