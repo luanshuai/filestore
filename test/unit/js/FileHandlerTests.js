@@ -3,10 +3,13 @@ const chai = require('chai')
 const { expect } = chai
 const modulePath = '../../../app/js/FileHandler.js'
 const SandboxedModule = require('sandboxed-module')
-const { ObjectId } = require('mongodb')
 
 chai.use(require('sinon-chai'))
 chai.use(require('chai-as-promised'))
+
+function ObjectId() {
+  return [...Array(24)].map(() => Math.random().toString(16)[2]).join('')
+}
 
 describe('FileHandler', function() {
   let PersistorManager,

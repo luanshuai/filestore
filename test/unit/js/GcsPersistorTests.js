@@ -3,10 +3,13 @@ const chai = require('chai')
 const { expect } = chai
 const modulePath = '../../../app/js/GcsPersistor.js'
 const SandboxedModule = require('sandboxed-module')
-const { ObjectId } = require('mongodb')
 const asyncPool = require('tiny-async-pool')
 
 const Errors = require('../../../app/js/Errors')
+
+function ObjectId() {
+  return [...Array(24)].map(() => Math.random().toString(16)[2]).join('')
+}
 
 describe('GcsPersistorTests', function() {
   const filename = '/wombat/potato.tex'
